@@ -1,8 +1,7 @@
 Training tesseract for Chinese
 ==============================
 
-
-为了提高识别含有中文字符图像的准确率和速度，我们应该根据实际应用，将字符集限制在一个小的范围。不必用系统自带的`chi_sim.traindata`作为training data.
+为了提高识别含有中文字符图像的准确率和速度，我们应该根据实际应用，将字符集限制在一个小的范围。不必用系统默认安装的语言文件，如简体中文`chi_sim.traineddata`
 
 通过以下几个步骤，展示一下如何训练，以达到又快又准
 
@@ -16,7 +15,7 @@ Training tesseract for Chinese
 有了以上限定，我们按照[官方][1.1]的要求，如下：
 > Make sure there are a minimum number of samples of each character. 10 is good, but 5 is OK for rare characters.
 
-样本文件命名为[chi_sim.trainint_text](chi_sim/chi_sim.trainint_text)
+样本文件命名为[chi_sim.trainint_text](chi_sim/chi_sim.training_text)
 
 2. Training
 -----------
@@ -25,11 +24,14 @@ Training tesseract for Chinese
 
 ### 准备langdata目录，目录下存放你要训练的样本 ###
 
-langdata需从Tesseract官方的repository下载：
+由于`tesstrain.sh`需要用到langdata下的一些文件，因此langdata需从Tesseract官方的repository下载：
+
     $ git clone git@github.com:tesseract-ocr/langdata.git
 
-将langdata目录下chi_sim目录下的内容删除，将chi_sim.的
+将langdata目录下chi_sim目录下的文件删除，将[chi_sim.trainint_text](chi_sim/chi_sim.training_text)拷入langdata/chi_sim中
 
+    $ rm -f langdata/chi_sim
+    $ cp chi_sim/chi_sim.training_text langdata/chi_sim
     $ ls langdata/chi_sim
     chi_sim.training_text
 
@@ -44,7 +46,7 @@ langdata需从Tesseract官方的repository下载：
 
     $ text2image --text=langdata/chi_sim/chi_sim.training_text --outputbase=chi_sim --find_fonts --fonts_dir=./fonts --min_coverage=1.0 --render_per_font=false
 
-以上命令将可用的字体生成到chi_sim.fontlist.txt文件中
+以上命令将可用的字体名称输出到chi_sim.fontlist.txt文件中
 
     $ cat chi_sim.fontlist.txt
     Arial Unicode MS
