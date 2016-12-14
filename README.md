@@ -55,12 +55,14 @@ Training tesseract for Chinese
     STFangsong
     STSong
     SimSun
+    WenQuanYi Zen Hei Medium
 
 ### 调用tesstrain.sh进行训练
 
 运行`tesstrain.sh`命令进行训练，通过--fonts_dir指定我们的字体目录和--fontlist指定我们的字体名称：
 
-    tesstrain.sh --lang chi_sim --langdata_dir langdata --fonts_dir fonts --fontlist 'Arial Unicode MS' 'NSimSun' 'SimSun' 'STFangsong' 'STSong' 'FangSong'
+    tesstrain.sh --lang chi_sim --langdata_dir langdata --fonts_dir fonts --fontlist \
+        'Arial Unicode MS' 'NSimSun' 'SimSun' 'STFangsong' 'STSong' 'FangSong' 'WenQuanYi Zen Hei Medium'
     ...
     Output /tmp/tmp.XcoPxPvPPl/chi_sim/chi_sim.traineddata created successfully.
     Creating new directory /tmp/tesstrain/tessdata
